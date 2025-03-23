@@ -27,9 +27,13 @@ public class PlaceholderContent {
 
     static {
         // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createPlaceholderItem(i));
-        }
+//        for (int i = 1; i <= COUNT; i++) {
+//            addItem(createPlaceholderItem(i));
+//        }
+        addItem(new PlaceholderItem("1", "Photos"));
+        addItem(new PlaceholderItem("2", "Tour"));
+        addItem(new PlaceholderItem("3", "Web Site", "http:/bikebarge.com"));
+
     }
 
     private static void addItem(PlaceholderItem item) {
@@ -38,7 +42,7 @@ public class PlaceholderContent {
     }
 
     private static PlaceholderItem createPlaceholderItem(int position) {
-        return new PlaceholderItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new PlaceholderItem(String.valueOf(position), "Item " + position);
     }
 
     private static String makeDetails(int position) {
@@ -54,14 +58,24 @@ public class PlaceholderContent {
      * A placeholder item representing a piece of content.
      */
     public static class PlaceholderItem {
-        public final String id;
-        public final String content;
-        public final String details;
+        public String id;
+        public String content;
+        public String item_name;
+        public String item_url;
 
-        public PlaceholderItem(String id, String content, String details) {
+
+        public PlaceholderItem(String id, String content) {
             this.id = id;
             this.content = content;
-            this.details = details;
+
+
+        }
+
+        public PlaceholderItem(String id, String item_name, String item_url) {
+            this.id = id;
+            this.item_name = item_name;
+            this.item_url = item_url;
+            content = item_name;
         }
 
         @Override

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -71,9 +72,22 @@ public class ItemDetailFragment extends Fragment {
 
         binding = FragmentItemDetailBinding.inflate(inflater, container, false);
         View rootView = binding.getRoot();
+        if (mItem != null) {
+            if (mItem.id.equals("1")) {
+                rootView = inflater.inflate(R.layout.photos, container, false);
+            }
+            if (mItem.id.equals("2")) {
+                rootView = inflater.inflate(R.layout.tour, container, false);
+            }
+            if (mItem.id.equals("3")) {
+                ((WebView) rootView.findViewById(R.id.item_detail)).loadUrl((mItem.item_url));
+            }
+
+        }
+
 
         mToolbarLayout = rootView.findViewById(R.id.toolbar_layout);
-        mTextView = binding.itemDetail;
+//        mTextView = binding.itemDetail;
 
         // Show the placeholder content as text in a TextView & in the toolbar if available.
         updateContent();
@@ -89,7 +103,7 @@ public class ItemDetailFragment extends Fragment {
 
     private void updateContent() {
         if (mItem != null) {
-            mTextView.setText(mItem.details);
+            mTextView.setText(mItem.item_url);
             if (mToolbarLayout != null) {
                 mToolbarLayout.setTitle(mItem.content);
             }
